@@ -8,23 +8,28 @@
             InitializeComponent();
         }
 
-        //public void LoginKnopClicked(object sender, EventArgs e)
-        //{
-        //    bool IsUsernameEmpty = string.IsNullOrEmpty(UsernameEntry.Text);
-        //    bool IsPasswordEmpty = string.IsNullOrEmpty(PasswordEnrty.Text);
+        private void LogInButton_Clicked(object sender, EventArgs e)
+        {
 
-        //    if (IsUsernameEmpty)
-        //    {
-        //        UsernameEntry.Placeholder = "Vul iets in";
-        //    }
-        //    else if (IsPasswordEmpty)
-        //    {
-        //        PasswordEnrty.Placeholder = "Vul iets in";
-        //    }
-        //    else
-        //    {
-        //        Navigation.PushAsync(new Newpage());
-        //    }
-        //}
+        }
+
+        public void LoginKnopClicked(object sender, EventArgs e)
+        {
+            bool IsUsernameEmpty = string.IsNullOrEmpty(UsernameEntry.Text);
+            bool IsPasswordEmpty = string.IsNullOrEmpty(PasswordEntry.Text);
+
+            if (IsUsernameEmpty)
+            {
+                UsernameEntry.Placeholder = "Vul iets in";
+            }
+            else if (IsPasswordEmpty)
+            {
+                PasswordEntry.Placeholder = "Vul iets in";
+            }
+            else
+            {
+                Navigation.PushAsync(new Hoofdscherm());
+            }
+        }
     }
 }

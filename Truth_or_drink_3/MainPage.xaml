@@ -40,11 +40,13 @@
             IsPassword="True" />
         <Button
             x:Name="LogInButton"
+            Clicked="LoginKnopClicked"
             Text="Inloggen"
             Margin="0,40,0,0"
             TextColor="White"
             HorizontalOptions="Center"
             BackgroundColor="#48FDF8" />
+
 
     </StackLayout>
 </ContentPage>
