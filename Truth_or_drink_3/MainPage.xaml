@@ -1,0 +1,50 @@
+﻿<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Truth_or_drink_3.MainPage"
+             BackgroundColor="Black">
+
+    <StackLayout
+        Spacing="25"
+        Padding="30"
+        VerticalOptions="Start">
+
+
+        <Image 
+            Source="logo" 
+            HorizontalOptions="Center"
+            WidthRequest="200"
+            HeightRequest="200" />
+        <Label
+            x:Name="UsernameLabel"
+            Margin="0,25,0,0"
+            FontSize="18"
+            TextColor="#48FDF8"
+            FontAttributes="Bold" 
+            Text="Gebruikersnaam"
+            HorizontalOptions="Center" />
+        <Entry
+            x:Name="UsernameEntry"
+            Placeholder="Hier je gebruikersnaam"
+            HorizontalOptions="Center" />
+        <Label
+            x:Name="PasswordLabel"
+            FontSize="18"
+            TextColor="#48FDF8"
+            FontAttributes="Bold" 
+            Text="Wachtwoord"
+            HorizontalOptions="Center" />
+        <Entry
+            x:Name="PasswordEntry"
+            Placeholder="Hier je wachtwoord"
+            HorizontalOptions="Center"
+            IsPassword="True" />
+        <Button
+            x:Name="LogInButton"
+            Text="Inloggen"
+            Margin="0,40,0,0"
+            TextColor="White"
+            HorizontalOptions="Center"
+            BackgroundColor="#48FDF8" />
+
+    </StackLayout>
+</ContentPage>
