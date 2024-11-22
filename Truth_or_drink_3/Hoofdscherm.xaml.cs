@@ -6,5 +6,10 @@ namespace Truth_or_drink_3
         {
             InitializeComponent();
         }
+
+        private void CreateKnopClicked(object sender, EventArgs e)
+        {
+            Navigation.PushAsync(new Create());
+        }
     }
 }

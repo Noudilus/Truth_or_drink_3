@@ -16,6 +16,7 @@
             HeightRequest="200" />
         <Button
             x:Name="CreateButton"
+            Clicked="CreateKnopClicked"
             WidthRequest="200"
             HeightRequest="75"
             FontSize="30"
