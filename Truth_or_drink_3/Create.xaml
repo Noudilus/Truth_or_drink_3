@@ -1,18 +1,102 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Truth_or_drink_3.Create"
-             BackgroundColor="Black">
+             BackgroundColor="Black"
+             Title="Create Page">
 
-    <StackLayout
-        Spacing="25"
-        Padding="30"
-        VerticalOptions="Start">
+    <VerticalStackLayout
+        Spacing="10"
+        Padding="20"
+        VerticalOptions="Center"
+        HorizontalOptions="Center">
 
-        <Image 
-            Source="logo" 
-            HorizontalOptions="Center"
-            WidthRequest="200"
-            HeightRequest="200" />
-        
-    </StackLayout>
+        <!-- Code and QR Code Section -->
+        <HorizontalStackLayout Spacing="20" HorizontalOptions="Center">
+            <VerticalStackLayout>
+                <Label Text="Code"
+                       TextColor="#48FDF8"
+                       FontSize="18"
+                       FontAttributes="Bold"
+                       HorizontalOptions="Center" />
+                <Label x:Name="CodeLabel"
+                       Text="13693"
+                       FontSize="22"
+                       TextColor="White"
+                       FontAttributes="Bold"
+                       HorizontalOptions="Center" />
+            </VerticalStackLayout>
+
+            <VerticalStackLayout>
+                <Label Text="QR code"
+                       TextColor="#48FDF8"
+                       FontAttributes="Bold"
+                       FontSize="18"
+                       HorizontalOptions="Center" />
+                <Image Source="qrcodeapp"
+                       WidthRequest="100"
+                       HeightRequest="100"
+                       HorizontalOptions="Center" />
+            </VerticalStackLayout>
+        </HorizontalStackLayout>
+
+        <!-- Custom Vragen Button -->
+        <Button Text="Custom vragen"
+                FontSize="16"
+                FontAttributes="Bold"
+                BackgroundColor="#48FDF8"
+                TextColor="Black"
+                CornerRadius="10"
+                HorizontalOptions="Center"
+                WidthRequest="200"
+                HeightRequest="40"/>
+
+        <!-- Thema Button -->
+        <Button Text="Thema"
+                FontSize="16"
+                FontAttributes="Bold"
+                BackgroundColor="#48FDF8"
+                TextColor="Black"
+                CornerRadius="10"
+                HorizontalOptions="Center"
+                WidthRequest="200"
+                HeightRequest="40"/>
+
+        <!-- Difficulty Section -->
+        <Label Text="Moeilijkheidsgraat"
+               FontSize="16"
+               TextColor="#48FDF8"
+               FontAttributes="Bold"
+               HorizontalOptions="Center"
+               Margin="10,20,10,0" />
+        <HorizontalStackLayout Spacing="5" HorizontalOptions="Center">
+            <Image Source="star_filled.png" WidthRequest="25" HeightRequest="25" />
+            <Image Source="star_filled.png" WidthRequest="25" HeightRequest="25" />
+            <Image Source="star_filled.png" WidthRequest="25" HeightRequest="25" />
+            <Image Source="star_empty.png" WidthRequest="25" HeightRequest="25" />
+            <Image Source="star_empty.png" WidthRequest="25" HeightRequest="25" />
+        </HorizontalStackLayout>
+
+        <!-- Score and Start Button -->
+        <HorizontalStackLayout Spacing="20" HorizontalOptions="Center" Margin="10,30,10,0">
+            <Label Text="0/20"
+                   FontSize="16"
+                   TextColor="#48FDF8"
+                   FontAttributes="Bold"
+                   VerticalOptions="Center" />
+            <Image Source="user_icon.png"
+                   WidthRequest="25"
+                   HeightRequest="25"
+                   VerticalOptions="Center" />
+            <Button Text="Start"
+                    FontSize="18"
+                    BackgroundColor="#48FDF8"
+                    TextColor="black"
+                    FontAttributes="Bold"
+                    CornerRadius="10"
+                    HorizontalOptions="Center"
+                    WidthRequest="100"
+                    HeightRequest="40"/>
+        </HorizontalStackLayout>
+
+    </VerticalStackLayout>
 </ContentPage>
