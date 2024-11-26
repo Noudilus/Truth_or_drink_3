@@ -42,8 +42,9 @@
             x:Name="LogInButton"
             Clicked="LoginKnopClicked"
             Text="Inloggen"
+            FontAttributes="Bold"
             Margin="0,40,0,0"
-            TextColor="White"
+            TextColor="Black"
             HorizontalOptions="Center"
             BackgroundColor="#48FDF8" />
 

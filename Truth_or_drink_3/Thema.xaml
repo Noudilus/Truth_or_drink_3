@@ -9,13 +9,9 @@
         Spacing="15"
         Padding="0"
         VerticalOptions="Start">
+        
 
 
-        <Image 
-            Source="logo" 
-            HorizontalOptions="Center"
-            WidthRequest="200"
-            HeightRequest="200" />
         <Button
             x:Name="SpicyButton"
             WidthRequest="200"
@@ -60,6 +56,17 @@
             Margin="0,0, 0,0"
             HorizontalOptions="Center"
             BackgroundColor="#48FDF8" />
+        <Button
+            x:Name="CustomButton"
+            WidthRequest="200"
+            HeightRequest="75"
+            FontSize="30"
+            FontAttributes="Bold"
+            TextColor="Black"
+            Text="Custom"            
+            Margin="0,90, 0,0"
+            HorizontalOptions="Center"
+            BackgroundColor="#f700ff" />
 
 
     </StackLayout>

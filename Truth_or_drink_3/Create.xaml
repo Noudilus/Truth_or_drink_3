@@ -43,28 +43,6 @@
             </VerticalStackLayout>
         </HorizontalStackLayout>
 
-        <!-- Custom Vragen Button -->
-        <Button Text="Custom vragen"
-                Margin="0,100,0,0"
-                FontSize="16"
-                FontAttributes="Bold"
-                BackgroundColor="#48FDF8"
-                TextColor="Black"
-                CornerRadius="10"
-                HorizontalOptions="Center"
-                WidthRequest="200"
-                HeightRequest="40"/>
-
-        <!-- Thema Button -->
-        <Button Text="Thema"
-                FontSize="16"
-                FontAttributes="Bold"
-                BackgroundColor="#48FDF8"
-                TextColor="Black"
-                CornerRadius="10"
-                HorizontalOptions="Center"
-                WidthRequest="200"
-                HeightRequest="40"/>
 
         <!-- Difficulty Section -->
         <Label Text="Moeilijkheidsgraat"
