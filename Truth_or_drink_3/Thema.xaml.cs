@@ -6,8 +6,8 @@ public partial class Thema : ContentPage
 	{
 		InitializeComponent();
 	}
-    //private void SpicyKnopClicked(object sender, EventArgs e)
-    //{
-    //    Navigation.PushAsync(new Create());
-    //}
+    private void NormaalKnopClicked(object sender, EventArgs e)
+    {
+        Navigation.PushAsync(new Create());
+    }
 }

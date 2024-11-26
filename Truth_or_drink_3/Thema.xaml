@@ -6,8 +6,8 @@
              BackgroundColor="Black">
 
     <StackLayout
-        Spacing="25"
-        Padding="30"
+        Spacing="15"
+        Padding="0"
         VerticalOptions="Start">
 
 
@@ -18,44 +18,46 @@
             HeightRequest="200" />
         <Button
             x:Name="SpicyButton"
-            WidthRequest="100"
+            WidthRequest="200"
             HeightRequest="75"
             FontSize="30"
             FontAttributes="Bold"
-            TextColor="#f700ff"
+            TextColor="Black"
             Text="Spicy"            
-            Margin="-125,40,0,0"
+            Margin="0,40,0,0"
+            HorizontalOptions="Center"
             BackgroundColor="#48FDF8" />
         <Button
             x:Name="DurfButton"
-            WidthRequest="100"
+            WidthRequest="200"
             HeightRequest="75"
             FontSize="30"
             FontAttributes="Bold"
-            TextColor="#f700ff"
+            TextColor="black"
             Text="Durf"            
-            Margin="125,-100,0,0"
+            Margin="0,0,0,0"
             HorizontalOptions="Center"
             BackgroundColor="#48FDF8" />
         <Button
             x:Name="NormaalButton"
-            WidthRequest="100"
+            Clicked="NormaalKnopClicked"
+            WidthRequest="200"
             HeightRequest="75"
             FontSize="30"
             FontAttributes="Bold"
-            TextColor="#f700ff"
+            TextColor="Black"
             Text="Normaal"            
-            Margin="-125,40,0,0"
+            Margin="0,0,0,0"
             BackgroundColor="#48FDF8" />
         <Button
             x:Name="MixButton"
-            WidthRequest="100"
+            WidthRequest="200"
             HeightRequest="75"
             FontSize="30"
             FontAttributes="Bold"
-            TextColor="#f700ff"
+            TextColor="Black"
             Text="Mix"            
-            Margin="125,-100,0,0"
+            Margin="0,0, 0,0"
             HorizontalOptions="Center"
             BackgroundColor="#48FDF8" />
 
