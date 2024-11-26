@@ -6,12 +6,5 @@ namespace Truth_or_drink_3
         {
             InitializeComponent();
         }
-
-        // Eventhandler voor de 'Terug'-knop
-        //private void BackButtonClicked(object sender, EventArgs e)
-        //{
-        //    // Navigatie terug naar de vorige pagina
-        //    Navigation.PopAsync();
-        //}
     }
 }
