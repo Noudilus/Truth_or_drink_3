@@ -6,8 +6,20 @@ public partial class Thema : ContentPage
 	{
 		InitializeComponent();
 	}
-    private void NormaalKnopClicked(object sender, EventArgs e)
+    private void WaarheidKnopClicked(object sender, EventArgs e)
     {
-        Navigation.PushAsync(new Create());
+        Navigation.PushAsync(new Vraag());
+    }
+    private void DoenKnopClicked(object sender, EventArgs e)
+    {
+        Navigation.PushAsync(new Doen());
+    }
+    private void DurfKnopClicked(object sender, EventArgs e)
+    {
+        Navigation.PushAsync(new Durf());
+    }
+    private void MixKnopClicked(object sender, EventArgs e)
+    {
+        Navigation.PushAsync(new Mix());
     }
 }

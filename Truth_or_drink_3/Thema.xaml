@@ -13,18 +13,20 @@
 
 
         <Button
-            x:Name="SpicyButton"
+            x:Name="DoenButton"
+            Clicked="DoenKnopClicked"
             WidthRequest="200"
             HeightRequest="75"
             FontSize="30"
             FontAttributes="Bold"
             TextColor="Black"
-            Text="Spicy"            
+            Text="Doen"            
             Margin="0,40,0,0"
             HorizontalOptions="Center"
             BackgroundColor="#48FDF8" />
         <Button
             x:Name="DurfButton"
+            Clicked="DurfKnopClicked"
             WidthRequest="200"
             HeightRequest="75"
             FontSize="30"
@@ -35,18 +37,19 @@
             HorizontalOptions="Center"
             BackgroundColor="#48FDF8" />
         <Button
-            x:Name="NormaalButton"
-            Clicked="NormaalKnopClicked"
+            x:Name="WaarheidButton"
+            Clicked="WaarheidKnopClicked"
             WidthRequest="200"
             HeightRequest="75"
             FontSize="30"
             FontAttributes="Bold"
             TextColor="Black"
-            Text="Normaal"            
+            Text="Waarheid"            
             Margin="0,0,0,0"
             BackgroundColor="#48FDF8" />
         <Button
             x:Name="MixButton"
+            Clicked="MixKnopClicked"
             WidthRequest="200"
             HeightRequest="75"
             FontSize="30"

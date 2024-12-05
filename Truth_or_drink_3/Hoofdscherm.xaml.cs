@@ -9,7 +9,7 @@ namespace Truth_or_drink_3
 
         private void CreateKnopClicked(object sender, EventArgs e)
         {
-            Navigation.PushAsync(new Thema());
+            Navigation.PushAsync(new Create());
         }
     }
 }
