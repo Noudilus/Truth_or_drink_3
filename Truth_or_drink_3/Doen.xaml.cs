@@ -9,10 +9,9 @@ namespace Truth_or_drink_3
         // Lijst met vragen
         private readonly List<string> _questions = new()
         {
-
             "[Random speler], doe een gek geluid na dat je als kind vaak maakte.",
             "[Random speler], probeer te lopen alsof je op de maan bent voor de komende 3 rondes.",
-            "[Random speler], spreek de komende 2 rondes alsof je een robot bent.",
+            "[Random speler], spreek de komende ronde alsof je een robot bent.",
             "[Random speler], imiteer je favoriete dier totdat iemand raadt wat het is.",
             "[Random speler], zing een fragment van je favoriete liedje zonder de tekst te gebruiken.",
             "[Random speler], dans alsof je een beroemdheid bent op de rode loper.",
@@ -155,8 +154,11 @@ namespace Truth_or_drink_3
         // Lijst met spelers
         private readonly List<string> _players = new()
         {
-            "Noud", "Eva", "Ricardo", "Dewi", "Rimke", "Damon", "Youp"
+            "Noud", "Eva", "Ricardo", "Dewi", "Rimke", "Damon", "Indy"
         };
+
+        // Index van de huidige speler
+        private int _currentPlayerIndex = 0;
 
         // Willekeurige generator
         private readonly Random _random = new();
@@ -172,11 +174,14 @@ namespace Truth_or_drink_3
             // Kies een willekeurige vraag
             string randomQuestion = _questions[_random.Next(_questions.Count)];
 
-            // Kies een willekeurige speler
-            string randomPlayer = _players[_random.Next(_players.Count)];
+            // Haal de volgende speler op
+            string currentPlayer = _players[_currentPlayerIndex];
+
+            // Update de index naar de volgende speler (circulair)
+            _currentPlayerIndex = (_currentPlayerIndex + 1) % _players.Count;
 
             // Vervang [Random speler] met de geselecteerde speler
-            string displayedQuestion = randomQuestion.Replace("[Random speler]", randomPlayer);
+            string displayedQuestion = randomQuestion.Replace("[Random speler]", currentPlayer);
 
             // Update de tekst van de vraag
             QuestionLabel.Text = displayedQuestion;

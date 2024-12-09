@@ -100,8 +100,11 @@ namespace Truth_or_drink_3
         // Lijst met spelers
         private readonly List<string> _players = new()
         {
-            "Noud", "Eva", "Ricardo", "Dewi", "Rimke", "Damon", "Youp"
+            "Noud", "Eva", "Ricardo", "Dewi", "Rimke", "Damon", "Indy"
         };
+
+        // Index van de huidige speler
+        private int _currentPlayerIndex = 0;
 
         // Willekeurige generator
         private readonly Random _random = new();
@@ -117,11 +120,14 @@ namespace Truth_or_drink_3
             // Kies een willekeurige vraag
             string randomQuestion = _questions[_random.Next(_questions.Count)];
 
-            // Kies een willekeurige speler
-            string randomPlayer = _players[_random.Next(_players.Count)];
+            // Haal de volgende speler op
+            string currentPlayer = _players[_currentPlayerIndex];
+
+            // Update de index naar de volgende speler (circulair)
+            _currentPlayerIndex = (_currentPlayerIndex + 1) % _players.Count;
 
             // Vervang [Random speler] met de geselecteerde speler
-            string displayedQuestion = randomQuestion.Replace("[Random speler]", randomPlayer);
+            string displayedQuestion = randomQuestion.Replace("[Random speler]", currentPlayer);
 
             // Update de tekst van de vraag
             QuestionLabel.Text = displayedQuestion;
