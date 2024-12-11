@@ -8,12 +8,12 @@
         Padding="30"
         VerticalOptions="Start">
 
-
         <Image 
             Source="logo" 
             HorizontalOptions="Center"
             WidthRequest="200"
             HeightRequest="200" />
+
         <Label
             x:Name="UsernameLabel"
             Margin="0,25,0,0"
@@ -22,10 +22,12 @@
             FontAttributes="Bold" 
             Text="Gebruikersnaam"
             HorizontalOptions="Center" />
+
         <Entry
             x:Name="UsernameEntry"
             Placeholder="Hier je gebruikersnaam"
             HorizontalOptions="Center" />
+
         <Label
             x:Name="PasswordLabel"
             FontSize="18"
@@ -33,21 +35,39 @@
             FontAttributes="Bold" 
             Text="Wachtwoord"
             HorizontalOptions="Center" />
+
         <Entry
             x:Name="PasswordEntry"
             Placeholder="Hier je wachtwoord"
             HorizontalOptions="Center"
             IsPassword="True" />
+
+        <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Spacing="10">
+            <Switch x:Name="OnthoudMijSwitch" />
+            <Label
+                Text="Onthoud mij"
+                TextColor="#48FDF8"
+                VerticalOptions="Center" />
+        </StackLayout>
+
         <Button
             x:Name="LogInButton"
             Clicked="LoginKnopClicked"
             Text="Inloggen"
             FontAttributes="Bold"
-            Margin="0,40,0,0"
             TextColor="Black"
-            HorizontalOptions="Center"
-            BackgroundColor="#48FDF8" />
+            BackgroundColor="#48FDF8"
+            WidthRequest="120"
+            Margin="0,-10,-150,0"/>
 
-
+        <Button
+            x:Name="RegisterButton"
+            Clicked="RegisterButton_Clicked"
+            Text="Registreren"
+            FontAttributes="Bold"
+            TextColor="Black"
+            BackgroundColor="#f700ff"
+            WidthRequest="120"
+            Margin="0,-69,150,0"/>
     </StackLayout>
 </ContentPage>
