@@ -13,10 +13,8 @@ namespace Truth_or_drink_3
             InitializeComponent();
 
             // Initialize database
-            using (var db = new SQLiteConnection(dbPath))
-            {
-                db.CreateTable<User>();
-            }
+            using var db = new SQLiteConnection(dbPath);
+            db.CreateTable<User>();
 
             // Check if "Onthoud mij" is enabled
             if (Preferences.ContainsKey("SavedUsername") && Preferences.ContainsKey("SavedPassword"))
@@ -41,18 +39,16 @@ namespace Truth_or_drink_3
             }
             else
             {
-                using (var db = new SQLiteConnection(dbPath))
+                using var db = new SQLiteConnection(dbPath);
+                var existingUser = db.Table<User>().FirstOrDefault(u => u.Username == UsernameEntry.Text);
+                if (existingUser == null)
                 {
-                    var existingUser = db.Table<User>().FirstOrDefault(u => u.Username == UsernameEntry.Text);
-                    if (existingUser == null)
-                    {
-                        db.Insert(new User { Username = UsernameEntry.Text, Password = PasswordEntry.Text });
-                        DisplayAlert("Succes", "Registratie voltooid", "OK");
-                    }
-                    else
-                    {
-                        DisplayAlert("Fout", "Gebruikersnaam bestaat al", "OK");
-                    }
+                    db.Insert(new User { Username = UsernameEntry.Text, Password = PasswordEntry.Text });
+                    DisplayAlert("Succes", "Registratie voltooid", "OK");
+                }
+                else
+                {
+                    DisplayAlert("Fout", "Gebruikersnaam bestaat al", "OK");
                 }
             }
         }
@@ -72,23 +68,21 @@ namespace Truth_or_drink_3
             }
             else
             {
-                using (var db = new SQLiteConnection(dbPath))
+                using var db = new SQLiteConnection(dbPath);
+                var user = db.Table<User>().FirstOrDefault(u => u.Username == UsernameEntry.Text && u.Password == PasswordEntry.Text);
+                if (user != null)
                 {
-                    var user = db.Table<User>().FirstOrDefault(u => u.Username == UsernameEntry.Text && u.Password == PasswordEntry.Text);
-                    if (user != null)
+                    if (OnthoudMijSwitch.IsToggled)
                     {
-                        if (OnthoudMijSwitch.IsToggled)
-                        {
-                            Preferences.Set("SavedUsername", UsernameEntry.Text);
-                            Preferences.Set("SavedPassword", PasswordEntry.Text);
-                        }
+                        Preferences.Set("SavedUsername", UsernameEntry.Text);
+                        Preferences.Set("SavedPassword", PasswordEntry.Text);
+                    }
 
-                        Navigation.PushAsync(new Hoofdscherm());
-                    }
-                    else
-                    {
-                        DisplayAlert("Fout", "Ongeldige gebruikersnaam of wachtwoord", "OK");
-                    }
+                    Navigation.PushAsync(new Hoofdscherm());
+                }
+                else
+                {
+                    DisplayAlert("Fout", "Ongeldige gebruikersnaam of wachtwoord", "OK");
                 }
             }
         }
@@ -98,7 +92,7 @@ namespace Truth_or_drink_3
     {
         [PrimaryKey, AutoIncrement]
         public int Id { get; set; }
-        public string Username { get; set; }
-        public string Password { get; set; }
+        public string Username { get; set; } // Verwijder de required modifier
+        public string Password { get; set; } // Verwijder de required modifier
     }
 }

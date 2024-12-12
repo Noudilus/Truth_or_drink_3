@@ -18,8 +18,23 @@
                 Source="logo" 
                 HorizontalOptions="Center"
                 WidthRequest="200"
-                HeightRequest="200"
-                />
+                HeightRequest="200" />
+
+            <!-- Picker voor sterren -->
+            <Picker x:Name="StarPicker"
+                    Title="Selecteer sterren"
+                    SelectedIndex="0"
+                    SelectedIndexChanged="OnStarPickerChanged"
+                    TextColor="White"
+                    FontSize="18">
+                <Picker.Items>
+                    <x:String>1 ster</x:String>
+                    <x:String>2 sterren</x:String>
+                    <x:String>3 sterren</x:String>
+                    <x:String>4 sterren</x:String>
+                    <x:String>5 sterren</x:String>
+                </Picker.Items>
+            </Picker>
 
             <Label x:Name="QuestionLabel"
                 Text="Tik op het scherm om te beginnen en naar de volgende vraag te gaan"

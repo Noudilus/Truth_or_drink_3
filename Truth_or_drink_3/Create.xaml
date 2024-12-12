@@ -14,73 +14,41 @@
         <!-- Code and QR Code Section -->
         <HorizontalStackLayout Spacing="20" HorizontalOptions="Center">
             <VerticalStackLayout>
-                <Label Text="Code:"
-                       TextColor="#48FDF8"
-                       Margin="0,-50,25,0"
-                       FontSize="20"
-                       FontAttributes="Bold"
-                       HorizontalOptions="Center" />
-                <Label x:Name="CodeLabel"
-                       Margin="0,10,27,0"
-                       Text="13693"
-                       FontSize="22"
-                       TextColor="White"
-                       FontAttributes="Bold"                      
-                       HorizontalOptions="Center" />
-            </VerticalStackLayout>
-
-            <VerticalStackLayout>
                 <Label Text="QR code:"
                        Margin="0,-50,0,0"
                        TextColor="#48FDF8"
                        FontAttributes="Bold"
-                       FontSize="20"
+                       FontSize="30"
                        HorizontalOptions="Center" />
                 <Image Source="qrcodeapp"
-                       WidthRequest="150"
+                       WidthRequest="250"
                        Margin="0,10,0,0"
-                       HeightRequest="150"
+                       HeightRequest="250"
                        HorizontalOptions="Center" />
             </VerticalStackLayout>
         </HorizontalStackLayout>
 
-
-        <!-- Difficulty Section -->
-        <Label Text="Moeilijkheidsgraat"
-               FontSize="16"
-               TextColor="#48FDF8"
-               FontAttributes="Bold"
-               HorizontalOptions="Center"
-               Margin="10,20,10,0" />
-        <HorizontalStackLayout Spacing="5" HorizontalOptions="Center">
-            <Image Source="star_filled.png" WidthRequest="25" HeightRequest="25" />
-            <Image Source="star_filled.png" WidthRequest="25" HeightRequest="25" />
-            <Image Source="star_filled.png" WidthRequest="25" HeightRequest="25" />
-            <Image Source="star_empty.png" WidthRequest="25" HeightRequest="25" />
-            <Image Source="star_empty.png" WidthRequest="25" HeightRequest="25" />
-        </HorizontalStackLayout>
-
-        <!-- Score and Start Button -->
+        <!-- Start Button -->
         <HorizontalStackLayout Spacing="20" HorizontalOptions="Center" Margin="10,30,10,0">
             <Label Text="0/20"
-                   FontSize="16"
+                   FontSize="25"
                    TextColor="#48FDF8"
                    FontAttributes="Bold"
                    VerticalOptions="Center" />
             <Image Source="user_icon.png"
-                   WidthRequest="25"
-                   HeightRequest="25"
+                   WidthRequest="40"
+                   HeightRequest="40"
                    VerticalOptions="Center" 
                    Margin="0,0,30,0"/>
             <Button Text="Start"
-                    FontSize="18"
+                    FontSize="25"
                     BackgroundColor="#48FDF8"
                     TextColor="black"
                     FontAttributes="Bold"
                     CornerRadius="10"
                     HorizontalOptions="Center"
-                    WidthRequest="100"
-                    HeightRequest="40"
+                    WidthRequest="120"
+                    HeightRequest="50"
                     Clicked="OnStartButtonClicked" />
         </HorizontalStackLayout>
 
