@@ -1,13 +1,18 @@
 using Microsoft.Maui.Controls;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Truth_or_drink_3
 {
     public partial class Vraag : ContentPage
     {
-        // Lijst met vragen met sterrenwaardering
-        private readonly List<(string Question, int Stars)> _questions = new()
+        private readonly List<Player> _players; // Dynamische spelerslijst
+        private int _currentPlayerIndex = 0;
+        private readonly Random _random = new();
+        private int _selectedStars = 0;
+
+        private readonly List<(string Text, int Stars)> _questions = new()
         {
             // 1 ster
             ("[Random speler], wat is het laatste dat je hebt gegoogled?", 1),
@@ -45,90 +50,43 @@ namespace Truth_or_drink_3
             ("[Random speler], wat is het meest gênante dat je ooit in een groepschat hebt gestuurd?", 5),
         };
 
-        // Lijst met spelers
-        private readonly List<string> _players = new()
-        {
-            "Noud", "Eva", "Ricardo", "Dewi", "Rimke", "Damon", "Indy"
-        };
-
-        private int _currentPlayerIndex = 0;
-        private readonly Random _random = new();
-
-        public Vraag()
+        public Vraag(List<Player> players)
         {
             InitializeComponent();
+            _players = players; // Dynamische lijst van spelers instellen
         }
 
-        // Methode die wordt uitgevoerd bij een tik op het scherm
         private void OnPageTapped(object sender, EventArgs e)
         {
-            // Controleer of een moeilijkheidsgraad is geselecteerd
-            if (StarPicker.SelectedIndex < 0)
+            if (_selectedStars == 0)
             {
-                // Toon een melding dat de gebruiker een moeilijkheidsgraad moet selecteren
-                DisplayAlert("Let op", "Selecteer een moeilijkheidsgraad voordat je een vraag kunt krijgen.", "OK");
+                QuestionLabel.Text = "Selecteer eerst een moeilijkheidsgraad!";
                 return;
             }
 
-            // Haal de geselecteerde moeilijkheidsgraad op
-            int selectedStars = StarPicker.SelectedIndex + 1;
-
-            // Filter vragen op basis van sterren
-            var filteredQuestions = _questions.FindAll(q => q.Stars == selectedStars);
-
-            if (filteredQuestions.Count == 0)
+            // Filter vragen op basis van geselecteerde sterren
+            var filteredQuestions = _questions.Where(q => q.Stars <= _selectedStars).ToList();
+            if (!filteredQuestions.Any())
             {
-                // Geen vragen beschikbaar voor de geselecteerde sterrenwaardering
-                QuestionLabel.Text = "Geen vragen beschikbaar voor deze moeilijkheidsgraad.";
+                QuestionLabel.Text = "Geen vragen beschikbaar!";
                 return;
             }
 
-            // Kies een willekeurige vraag uit de gefilterde vragen
-            var (randomQuestion, _) = filteredQuestions[_random.Next(filteredQuestions.Count)];
+            // Willekeurige vraag kiezen
+            var randomQuestion = filteredQuestions[_random.Next(filteredQuestions.Count)].Text;
+            var currentPlayer = _players[_currentPlayerIndex].Name;
 
-            // Haal de huidige speler op
-            string currentPlayer = _players[_currentPlayerIndex];
-
-            // Vervang [Random speler] met de geselecteerde speler
-            string displayedQuestion = randomQuestion.Replace("[Random speler]", currentPlayer);
-
-            // Update de vraagtekst
-            QuestionLabel.Text = displayedQuestion;
-
-            // Update index voor de volgende speler
+            // Volgende speler selecteren
             _currentPlayerIndex = (_currentPlayerIndex + 1) % _players.Count;
+
+            // Vervang [Random speler] door huidige speler en toon vraag
+            var displayedQuestion = randomQuestion.Replace("[Random speler]", currentPlayer);
+            QuestionLabel.Text = displayedQuestion;
         }
 
-        // Eventhandler voor verandering in de sterren-Picker
         private void OnStarPickerChanged(object sender, EventArgs e)
         {
-            if (sender is Picker picker)
-            {
-                int selectedIndex = picker.SelectedIndex;
-                if (selectedIndex >= 0 && selectedIndex < 5) // Geldige index
-                {
-                    // Filter vragen op basis van sterren
-                    int selectedStars = selectedIndex + 1;
-                    var filteredQuestions = _questions.FindAll(q => q.Stars == selectedStars);
-
-                    if (filteredQuestions.Count > 0)
-                    {
-                        var (randomQuestion, _) = filteredQuestions[_random.Next(filteredQuestions.Count)];
-                        string currentPlayer = _players[_currentPlayerIndex];
-                        string displayedQuestion = randomQuestion.Replace("[Random speler]", currentPlayer);
-
-                        // Update vraagtekst
-                        QuestionLabel.Text = displayedQuestion;
-
-                        // Update index voor volgende speler
-                        _currentPlayerIndex = (_currentPlayerIndex + 1) % _players.Count;
-                    }
-                    else
-                    {
-                        QuestionLabel.Text = "Geen vragen beschikbaar voor deze sterrenwaardering.";
-                    }
-                }
-            }
+            _selectedStars = StarPicker.SelectedIndex + 1;
         }
     }
 }

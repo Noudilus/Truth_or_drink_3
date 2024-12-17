@@ -7,11 +7,7 @@ namespace Truth_or_drink_3
 {
     public partial class Mix : ContentPage
     {
-        private readonly List<string> _players = new()
-        {
-            "Noud", "Eva", "Ricardo", "Dewi", "Rimke", "Damon", "Indy"
-        };
-
+        private readonly List<Player> _players;
         private int _currentPlayerIndex = 0;
         private readonly Random _random = new();
         private int _selectedStars = 0; // Standaardwaarde is 0 (geen selectie)
@@ -119,9 +115,10 @@ namespace Truth_or_drink_3
             ("[Random speler], vertel een mop, maar doe alsof het een levensles is.", 5),
         };
 
-        public Mix()
+        public Mix(List<Player> players)
         {
             InitializeComponent();
+            _players = players ?? new List<Player>(); // Zorg dat de lijst altijd geïnitialiseerd is
         }
 
         private void OnPageTapped(object sender, EventArgs e)
@@ -136,14 +133,14 @@ namespace Truth_or_drink_3
                 .Where(q => q.Stars <= _selectedStars)
                 .ToList();
 
-            if (filteredQuestions.Count == 0)
+            if (!filteredQuestions.Any())
             {
                 QuestionLabel.Text = "Geen vragen beschikbaar!";
                 return;
             }
 
             var randomQuestion = filteredQuestions[_random.Next(filteredQuestions.Count)].Text;
-            var currentPlayer = _players[_currentPlayerIndex];
+            var currentPlayer = _players[_currentPlayerIndex].Name;
             _currentPlayerIndex = (_currentPlayerIndex + 1) % _players.Count;
             QuestionLabel.Text = randomQuestion.Replace("[Random speler]", currentPlayer);
         }

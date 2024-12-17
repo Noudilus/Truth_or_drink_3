@@ -2,55 +2,82 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Truth_or_drink_3.Create"
-             BackgroundColor="Black"
+             BackgroundColor="black"
              Title="Create Page">
 
-    <VerticalStackLayout
-        Spacing="10"
-        Padding="20"
-        VerticalOptions="Center"
-        HorizontalOptions="Center">
+    <VerticalStackLayout Padding="20" Spacing="15">
 
-        <!-- Code and QR Code Section -->
-        <HorizontalStackLayout Spacing="20" HorizontalOptions="Center">
-            <VerticalStackLayout>
-                <Label Text="QR code:"
-                       Margin="0,-50,0,0"
-                       TextColor="#48FDF8"
-                       FontAttributes="Bold"
-                       FontSize="30"
-                       HorizontalOptions="Center" />
-                <Image Source="qrcodeapp"
-                       WidthRequest="250"
-                       Margin="0,10,0,0"
-                       HeightRequest="250"
-                       HorizontalOptions="Center" />
-            </VerticalStackLayout>
-        </HorizontalStackLayout>
+        <!-- Titel -->
+        <Label Text="Voeg spelers toe" 
+               FontSize="30" 
+               FontAttributes="Bold" 
+               HorizontalOptions="Center" 
+               TextColor="White" />
 
-        <!-- Start Button -->
-        <HorizontalStackLayout Spacing="20" HorizontalOptions="Center" Margin="10,30,10,0">
-            <Label Text="0/20"
-                   FontSize="25"
-                   TextColor="#48FDF8"
-                   FontAttributes="Bold"
-                   VerticalOptions="Center" />
-            <Image Source="user_icon.png"
-                   WidthRequest="40"
-                   HeightRequest="40"
-                   VerticalOptions="Center" 
-                   Margin="0,0,30,0"/>
-            <Button Text="Start"
-                    FontSize="25"
+        <!-- Naam toevoegen sectie -->
+        <HorizontalStackLayout Spacing="10">
+            <Entry x:Name="NameEntry"
+                   Placeholder="Voer naam in"
+                   FontSize="18"
+                   HorizontalOptions="FillAndExpand" />
+            <Button Text="Toevoegen"
+                    FontSize="18"
                     BackgroundColor="#48FDF8"
                     TextColor="black"
                     FontAttributes="Bold"
-                    CornerRadius="10"
-                    HorizontalOptions="Center"
-                    WidthRequest="120"
-                    HeightRequest="50"
-                    Clicked="OnStartButtonClicked" />
+                    Clicked="AddPlayerButtonClicked" />
         </HorizontalStackLayout>
+
+        <!-- Spelers lijst -->
+        <Label Text="Spelerslijst:"
+               FontSize="20"
+               FontAttributes="Bold"
+               TextColor="White" />
+
+        <ListView x:Name="NamesListView"
+                  ItemsSource="{Binding Players}"
+                  Margin="0,0,0,20"
+                  BackgroundColor="#f8f8f8"
+                  SeparatorVisibility="None">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <StackLayout Orientation="Horizontal" Padding="10" Spacing="10" HorizontalOptions="FillAndExpand" BackgroundColor="LightGray">
+                            <Label Text="{Binding Name}" 
+                                   VerticalOptions="Center" 
+                                   FontSize="20" 
+                                   TextColor="Black" 
+                                   HorizontalOptions="StartAndExpand" />
+                            <Button Text="X" 
+                                    TextColor="black"
+                                    FontAttributes="Bold"
+                                    BackgroundColor="Transparent" 
+                                    FontSize="18" 
+                                    WidthRequest="40" 
+                                    HeightRequest="40" 
+                                    Padding="0" 
+                                    VerticalOptions="Center" 
+                                    HorizontalOptions="End" 
+                                    Clicked="DeletePlayerButtonClicked" 
+                                    CommandParameter="{Binding .}" />
+                        </StackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+
+        </ListView>
+
+        <!-- Startknop -->
+        <Button Text="Start"
+                FontSize="25"
+                BackgroundColor="#48FDF8"
+                TextColor="Black"
+                FontAttributes="Bold"
+                CornerRadius="10"
+                HorizontalOptions="Center"
+                WidthRequest="120"
+                HeightRequest="50"
+                Clicked="StartButtonClicked" />
 
     </VerticalStackLayout>
 </ContentPage>

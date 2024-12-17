@@ -1,63 +1,56 @@
+<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Truth_or_drink_3.Durf"
-             Title="Durf"
+             x:Class="Truth_or_drink_3.DurfPage"
              BackgroundColor="Black">
-    <ContentPage.Content>
-        <VerticalStackLayout 
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" 
-            Spacing="20">
 
-            <!-- Voeg een tap gesture toe aan het gehele VerticalStackLayout -->
-            <VerticalStackLayout.GestureRecognizers>
-                <TapGestureRecognizer Tapped="OnPageTapped" />
-            </VerticalStackLayout.GestureRecognizers>
+    <VerticalStackLayout Padding="20" Spacing="20" HorizontalOptions="Center" VerticalOptions="Center">
 
-            <!-- Logo -->
-            <Image 
-                Source="logo.png" 
-                HorizontalOptions="Center"
-                WidthRequest="200"
-                HeightRequest="200"
-                Margin="0,-100,0,0"/>
+        <Image 
+            Source="logo" 
+            HorizontalOptions="Center"
+            WidthRequest="200"
+            HeightRequest="200"
+            Margin="0,-150,0,0"/>
 
-            <!-- Picker voor sterren -->
-            <Picker x:Name="StarPicker"
-                    Title="Selecteer sterren"
-                    SelectedIndex="0"
-                    SelectedIndexChanged="OnStarPickerChanged"
-                    TextColor="White"
-                    FontSize="18">
-                <Picker.Items>
-                    <x:String>1 ster</x:String>
-                    <x:String>2 sterren</x:String>
-                    <x:String>3 sterren</x:String>
-                    <x:String>4 sterren</x:String>
-                    <x:String>5 sterren</x:String>
-                </Picker.Items>
-            </Picker>
+        <Label Text="Kies een vraag"
+               FontSize="30"
+               TextColor="#48FDF8"
+               HorizontalOptions="Center" />
 
-            <!-- Vraag Label -->
-            <Label x:Name="QuestionLabel"
-                   Text="Tik op het scherm om te beginnen en naar de volgende vraag te gaan"
-                   FontSize="32"
-                   HorizontalTextAlignment="Center"
-                   VerticalOptions="Center"
-                   FontAttributes="Bold"
-                   TextColor="#48FDF8"
-                   LineBreakMode="WordWrap"
-                   Padding="20" />
+        <Picker x:Name="StarPicker"
+                Title="Moeilijkheidsgraad"
+                SelectedIndexChanged="OnStarPickerChanged"
+                TextColor="Black"
+                BackgroundColor="White">
+            <Picker.Items>
+                <x:String>1 Ster</x:String>
+                <x:String>2 Sterren</x:String>
+                <x:String>3 Sterren</x:String>
+                <x:String>4 Sterren</x:String>
+                <x:String>5 Sterren</x:String>
+            </Picker.Items>
+        </Picker>
 
-            <!-- Instructie -->
-            <Label 
+        <Label x:Name="QuestionLabel"
+               Text="Tik om een vraag te genereren!"
+               FontSize="20"
+               TextColor="White"
+               HorizontalOptions="Center"
+               HorizontalTextAlignment="Center"
+               Margin="10" />
+
+        <Button Text="Tik hier voor een vraag"
+                FontAttributes="Bold"
+                BackgroundColor="#48FDF8"
+                TextColor="Black"
+                Clicked="OnPageTapped" />
+        <Label 
                 Text="Of neem een slok"
                 Margin="0,50,0,0"
                 FontSize="26"
                 FontAttributes="Bold"
                 HorizontalOptions="Center" 
                 TextColor="White" />
-
-        </VerticalStackLayout>
-    </ContentPage.Content>
+    </VerticalStackLayout>
 </ContentPage>

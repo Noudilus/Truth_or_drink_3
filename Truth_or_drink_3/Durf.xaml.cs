@@ -5,18 +5,13 @@ using System.Linq;
 
 namespace Truth_or_drink_3
 {
-    public partial class Durf : ContentPage
+    public partial class DurfPage : ContentPage
     {
-        private readonly List<string> _players = new()
-        {
-            "Noud", "Eva", "Ricardo", "Dewi", "Rimke", "Damon", "Indy"
-        };
-
+        private readonly List<Player> _players;
         private int _currentPlayerIndex = 0;
         private readonly Random _random = new();
-        private int _selectedStars = 0; // Standaardwaarde is 0 (geen selectie)
+        private int _selectedStars = 0;
 
-        // Vragen georganiseerd op basis van sterren
         private readonly List<(string Text, int Stars)> _questions = new()
         {
             // 1 ster vragen
@@ -60,60 +55,39 @@ namespace Truth_or_drink_3
             ("[Random speler], durf je een selfie te maken en direct te posten zonder filter?", 5)
         };
 
-        public Durf()
+        public DurfPage(List<Player> players)
         {
             InitializeComponent();
+            _players = players;
         }
 
         private void OnPageTapped(object sender, EventArgs e)
         {
-            // Controleer of een moeilijkheidsgraad is geselecteerd
             if (_selectedStars == 0)
             {
                 QuestionLabel.Text = "Selecteer eerst een moeilijkheidsgraad!";
-                Console.WriteLine("Geen moeilijkheidsgraad geselecteerd.");
                 return;
             }
 
-            // Filter vragen op basis van het aantal sterren
-            var filteredQuestions = _questions
-                .Where(q => q.Stars <= _selectedStars)
-                .ToList();
-
-            Console.WriteLine($"Aantal vragen gevonden met sterren <= {_selectedStars}: {filteredQuestions.Count}");
-
-            if (filteredQuestions.Count == 0)
+            var filteredQuestions = _questions.Where(q => q.Stars <= _selectedStars).ToList();
+            if (!filteredQuestions.Any())
             {
                 QuestionLabel.Text = "Geen vragen beschikbaar!";
                 return;
             }
 
-            // Kies een willekeurige vraag
             var randomQuestion = filteredQuestions[_random.Next(filteredQuestions.Count)].Text;
-            var currentPlayer = _players[_currentPlayerIndex];
+            var currentPlayer = _players[_currentPlayerIndex].Name;
 
-            // Update de speler index
             _currentPlayerIndex = (_currentPlayerIndex + 1) % _players.Count;
 
-            // Vervang de placeholder in de vraag
             var displayedQuestion = randomQuestion.Replace("[Random speler]", currentPlayer);
             QuestionLabel.Text = displayedQuestion;
-
-            Console.WriteLine($"Geselecteerde vraag: {displayedQuestion}");
         }
 
         private void OnStarPickerChanged(object sender, EventArgs e)
         {
-            if (StarPicker.SelectedIndex != -1)
-            {
-                _selectedStars = StarPicker.SelectedIndex + 1; // Stel de geselecteerde sterren in
-                Console.WriteLine($"Nieuwe selectie sterren: {_selectedStars}");
-            }
-            else
-            {
-                _selectedStars = 0; // Stel in op 0 als er geen selectie is
-                Console.WriteLine("Moeilijkheidsgraad deselecteerd.");
-            }
+            _selectedStars = StarPicker.SelectedIndex + 1;
         }
     }
 }
