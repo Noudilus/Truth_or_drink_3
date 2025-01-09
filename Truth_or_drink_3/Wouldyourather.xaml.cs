@@ -1,22 +1,19 @@
-using System;
-using System.Net.Http;
 using System.Text.Json;
-using System.Threading.Tasks;
-using Microsoft.Maui.Controls;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace Truth_or_drink_3
 {
     public partial class Wouldyourather : ContentPage
     {
+        private readonly DatabaseService _databaseService;
         private readonly List<Player> _players;
-        private int _currentPlayerIndex = 0; // Houd bij wie de huidige speler is
+        private int _currentPlayerIndex = 0;
 
-        public Wouldyourather(List<Player> players)
+        public Wouldyourather(DatabaseService databaseService, List<Player> players)
         {
             InitializeComponent();
-            _players = players ?? new List<Player>(); // Zorg ervoor dat _players correct is geïnitialiseerd
+            _databaseService = databaseService ?? throw new ArgumentNullException(nameof(databaseService));
+            _players = players ?? new List<Player>(); // Zorg ervoor dat de lijst van spelers niet null is
+            BindingContext = this;
         }
 
         public class WouldYouRatherQuestion
@@ -43,7 +40,7 @@ namespace Truth_or_drink_3
 
                 var options = new JsonSerializerOptions
                 {
-                    PropertyNameCaseInsensitive = true // Zorgt ervoor dat JSON-veldnaam niet hoofdlettergevoelig is
+                    PropertyNameCaseInsensitive = true
                 };
 
                 var questionData = JsonSerializer.Deserialize<WouldYouRatherQuestion>(response, options);
@@ -53,7 +50,7 @@ namespace Truth_or_drink_3
                     // Kies de volgende speler op basis van _currentPlayerIndex
                     var currentPlayer = GetNextPlayer();
 
-                    // Update de UI met de naam van de speler en de vraags
+                    // Update de UI met de naam van de speler en de vraag
                     Dispatcher.Dispatch(() =>
                     {
                         PlayerNameLabel.Text = $"Speler: {currentPlayer}";

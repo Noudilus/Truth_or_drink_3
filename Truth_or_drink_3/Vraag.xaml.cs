@@ -2,20 +2,33 @@ using Microsoft.Maui.Controls;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace Truth_or_drink_3
 {
     public partial class Vraag : ContentPage
     {
-        private readonly List<Player> _players; // Dynamische spelerslijst
-        private int _currentPlayerIndex = 0;
-        private readonly Random _random = new();
-        private int _selectedStars = 0;
+        private readonly DatabaseService _databaseService;
+        private List<Player> _players = new(); // Directe lijst van spelers
+        private int _currentPlayerIndex = 0; // Huidige speler index
+        private readonly Random _random = new(); // Willekeurige vraaggenerator
+        private int _selectedStars = 0; // Geselecteerde moeilijkheidsgraad (1-5 sterren)
+        private bool _isGyroscopeStill = true; // Houdt bij of de telefoon stil is
+        private bool _isGyroscopeRunning = false; // Houdt bij of de gyroscoop draait
 
+        // Constructor die de lijst van spelers ontvangt
+        public Vraag(DatabaseService databaseService, List<Player> players)
+        {
+            InitializeComponent();
+            _databaseService = databaseService;
+            _players = players ?? new List<Player>(); // Veiligstellen dat de lijst niet null is
+        }
+
+        // Vragenlijst met moeilijkheidsgraden
         private readonly List<(string Text, int Stars)> _questions = new()
         {
             // 1 ster
-            ("[Random speler], wat is het laatste dat je hebt gegoogled?", 1),
+            ("[Random speler], wat is het laatste dat je hebt gegoogeld?", 1),
             ("[Random speler], wat is iets waar je trots op bent?", 1),
             ("[Random speler], wat is de gekste droom die je hebt gehad?", 1),
             ("[Random speler], wie zou je bellen als je in de gevangenis zit?", 1),
@@ -50,12 +63,7 @@ namespace Truth_or_drink_3
             ("[Random speler], wat is het meest gênante dat je ooit in een groepschat hebt gestuurd?", 5),
         };
 
-        public Vraag(List<Player> players)
-        {
-            InitializeComponent();
-            _players = players; // Dynamische lijst van spelers instellen
-        }
-
+        // Methode die wordt uitgevoerd wanneer de pagina wordt getikt
         private void OnPageTapped(object sender, EventArgs e)
         {
             if (_selectedStars == 0)
@@ -72,21 +80,105 @@ namespace Truth_or_drink_3
                 return;
             }
 
-            // Willekeurige vraag kiezen
+            ShowNextQuestion(filteredQuestions);
+        }
+
+        // Methode die de volgende vraag toont
+        private void ShowNextQuestion(List<(string Text, int Stars)> filteredQuestions)
+        {
+            if (_players.Count == 0)
+            {
+                QuestionLabel.Text = "Er zijn geen spelers!";
+                return;
+            }
+
             var randomQuestion = filteredQuestions[_random.Next(filteredQuestions.Count)].Text;
             var currentPlayer = _players[_currentPlayerIndex].Name;
 
-            // Volgende speler selecteren
             _currentPlayerIndex = (_currentPlayerIndex + 1) % _players.Count;
 
-            // Vervang [Random speler] door huidige speler en toon vraag
             var displayedQuestion = randomQuestion.Replace("[Random speler]", currentPlayer);
             QuestionLabel.Text = displayedQuestion;
         }
 
+        // Methode die wordt uitgevoerd wanneer de sterrenkeuze wordt aangepast
         private void OnStarPickerChanged(object sender, EventArgs e)
         {
             _selectedStars = StarPicker.SelectedIndex + 1;
+        }
+
+        // Methode om de gyroscoop uitdaging te starten voor een speler
+        private async Task ShowGyroscopeChallenge(string currentPlayer)
+        {
+            if (!Gyroscope.IsSupported)
+            {
+                await DisplayAlert("Geen Gyroscoop", "De gyroscoop wordt niet ondersteund op dit apparaat.", "OK");
+                return;
+            }
+
+            if (_isGyroscopeRunning)
+            {
+                await DisplayAlert("Fout", "De gyroscoop draait al. Wacht tot de huidige test is voltooid.", "OK");
+                return;
+            }
+
+            _isGyroscopeStill = true;
+            _isGyroscopeRunning = true;
+            int countdown = 5;
+
+            Gyroscope.ReadingChanged += OnGyroscopeReadingChanged;
+
+            try
+            {
+                Gyroscope.Start(SensorSpeed.UI);
+            }
+            catch (Exception ex)
+            {
+                await DisplayAlert("Fout", $"Gyroscoop kon niet worden gestart: {ex.Message}", "OK");
+                return;
+            }
+
+            await DisplayAlert("Challenge!", $"{currentPlayer}, houd de telefoon 5 seconden zo stil mogelijk!", "OK");
+
+            while (countdown > 0)
+            {
+                await Task.Delay(1000);
+                countdown--;
+            }
+
+            Gyroscope.Stop();
+            Gyroscope.ReadingChanged -= OnGyroscopeReadingChanged;
+            _isGyroscopeRunning = false;
+
+            if (_isGyroscopeStill)
+            {
+                await DisplayAlert("Gefeliciteerd!", "Je hebt de telefoon stil genoeg gehouden. Het spel gaat door!", "OK");
+            }
+            else
+            {
+                await DisplayAlert("Te veel bewogen!", $"{currentPlayer}, je moet water gaan drinken!", "OK");
+            }
+        }
+
+        // Methode die wordt uitgevoerd wanneer er veranderingen zijn in de gyroscoopmeting
+        private void OnGyroscopeReadingChanged(object sender, GyroscopeChangedEventArgs e)
+        {
+            var reading = e.Reading;
+
+            double tolerance = 0.5; // Verhoog de tolerantie naar 0.5
+            if (Math.Abs(reading.AngularVelocity.X) > tolerance ||
+                Math.Abs(reading.AngularVelocity.Y) > tolerance ||
+                Math.Abs(reading.AngularVelocity.Z) > tolerance)
+            {
+                _isGyroscopeStill = false;
+            }
+        }
+
+        // Methode voor de "Neem een slok" knop
+        private void OnDrinkButtonClicked(object sender, EventArgs e)
+        {
+            // Je kunt hier de logica voor de "Neem een slok"-knop toevoegen
+            QuestionLabel.Text = "Je hebt een slok genomen!";
         }
     }
 }

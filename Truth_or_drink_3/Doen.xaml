@@ -5,7 +5,6 @@
              BackgroundColor="Black">
 
     <VerticalStackLayout Padding="20" Spacing="20" HorizontalOptions="Center" VerticalOptions="Center">
-
         <Image 
             Source="logo" 
             HorizontalOptions="Center"
@@ -45,12 +44,14 @@
                 BackgroundColor="#48FDF8"
                 TextColor="Black"
                 Clicked="OnPageTapped" />
-        <Label 
-                Text="Of neem een slok"
-                Margin="0,50,0,0"
-                FontSize="26"
-                FontAttributes="Bold"
+        <Button 
+                Text="Neem een slok" 
+                Margin="0,50,0,0" 
+                FontSize="26" 
+                FontAttributes="Bold" 
                 HorizontalOptions="Center" 
-                TextColor="White" />
+                TextColor="Black" 
+                BackgroundColor="#48FDF8"
+                Clicked="OnDrinkButtonClicked" />
     </VerticalStackLayout>
 </ContentPage>
