@@ -6,32 +6,58 @@
              BackgroundColor="Black">
 
     <StackLayout
-        Spacing="15"
+        Spacing="30"
         Padding="20"
         VerticalOptions="Center">
+
+        <Image 
+            Source="logo" 
+            HorizontalOptions="Center"
+            WidthRequest="200"
+            HeightRequest="200"
+            Margin="0,-100,0,0"/>
 
         <Label
             Text="Would You Rather"
             FontSize="36"
             FontAttributes="Bold"
             HorizontalOptions="Center"
-            TextColor="White" />
+            TextColor="#48FDF8" />
+
+        <!-- Label voor de naam van de speler -->
+        <Label
+            x:Name="PlayerNameLabel"
+            FontAttributes="Bold"
+            FontSize="24"
+            HorizontalOptions="Center"
+            TextColor="white" />
 
         <Label
             x:Name="QuestionLabel"
-            Text="Click the button below to get a question!"
+            Text="Klik op de knop voor een random vraag en speler"
             FontSize="20"
             HorizontalOptions="Center"
-            TextColor="White" />
+            FontAttributes="Bold"
+            TextColor="white" />
 
         <Button
             x:Name="GetQuestionButton"
-            Text="Get a Question"
+            Text="Krijg Vraag"
+            FontAttributes="Bold"
             Clicked="GetQuestionButtonClicked"
             FontSize="20"
+            Margin="0,0,0,0"
             BackgroundColor="#48FDF8"
             TextColor="Black"
             HorizontalOptions="Center" />
+
+        <Label 
+            Text="Of neem een slok"
+            Margin="0,0,0,0"
+            FontSize="26"
+            FontAttributes="Bold"
+            HorizontalOptions="Center" 
+            TextColor="White" />
 
     </StackLayout>
 </ContentPage>

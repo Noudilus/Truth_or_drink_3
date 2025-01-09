@@ -18,10 +18,11 @@
             FontSize="30"
             FontAttributes="Bold"
             TextColor="Black"
-            Text="Doen"            
-            Margin="0,40,0,0"
+            Text="Doen"
+            Margin="0,60,0,0"
             HorizontalOptions="Center"
             BackgroundColor="#48FDF8" />
+
         <Button
             x:Name="DurfButton"
             Clicked="DurfKnopClicked"
@@ -30,10 +31,11 @@
             FontSize="30"
             FontAttributes="Bold"
             TextColor="Black"
-            Text="Durf"            
+            Text="Durf"
             Margin="0,0,0,0"
             HorizontalOptions="Center"
             BackgroundColor="#48FDF8" />
+
         <Button
             x:Name="WaarheidButton"
             Clicked="WaarheidKnopClicked"
@@ -42,9 +44,10 @@
             FontSize="30"
             FontAttributes="Bold"
             TextColor="Black"
-            Text="Waarheid"            
+            Text="Waarheid"
             Margin="0,0,0,0"
             BackgroundColor="#48FDF8" />
+
         <Button
             x:Name="MixButton"
             Clicked="MixKnopClicked"
@@ -53,21 +56,24 @@
             FontSize="30"
             FontAttributes="Bold"
             TextColor="Black"
-            Text="Mix"            
+            Text="Mix"
             Margin="0,0,0,0"
             HorizontalOptions="Center"
             BackgroundColor="#48FDF8" />
+
         <Button
             x:Name="CustomButton"
+            Clicked="CustomKnopClicked"
             WidthRequest="200"
             HeightRequest="75"
             FontSize="30"
             FontAttributes="Bold"
             TextColor="Black"
-            Text="Custom"            
-            Margin="0,90,0,0"
+            Text="Custom"
+            Margin="0,0,0,0"
             HorizontalOptions="Center"
             BackgroundColor="#f700ff" />
+
         <Button
             x:Name="WouldYouRatherButton"
             Clicked="WouldYouRatherKnopClicked"
@@ -76,8 +82,8 @@
             FontSize="20"
             FontAttributes="Bold"
             TextColor="Black"
-            Text="Would You Rather"            
-            Margin="0,-180,0,0"
+            Text="Would You Rather"
+            Margin="0,0,0,0"
             HorizontalOptions="Center"
             BackgroundColor="#FFD700" />
 

@@ -30,10 +30,13 @@ public partial class Thema : ContentPage
         Navigation.PushAsync(new Mix(_players));
     }
 
-    // Nieuw: Event handler voor de "Would You Rather"-knop
+    private void CustomKnopClicked(object sender, EventArgs e)
+    {
+        Navigation.PushAsync(new Custom(_players));
+    }
+
     private void WouldYouRatherKnopClicked(object sender, EventArgs e)
     {
-        // Navigeer naar de Wouldyourather-pagina met de lijst van spelers
         Navigation.PushAsync(new Wouldyourather(_players));
     }
 }

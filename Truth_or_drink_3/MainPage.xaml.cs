@@ -78,7 +78,7 @@ namespace Truth_or_drink_3
                         Preferences.Set("SavedPassword", PasswordEntry.Text);
                     }
 
-                    Navigation.PushAsync(new Hoofdscherm());
+                    Navigation.PushAsync(new Create());
                 }
                 else
                 {

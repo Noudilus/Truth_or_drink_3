@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Truth_or_drink_3.Custom"
+             Title="Custom"
+             BackgroundColor="Black"
+             Padding="20">
+
+    <VerticalStackLayout Spacing="15">
+        <!-- Header -->
+        <Label 
+            Text="Custom Vragen"
+            FontSize="30"
+            FontAttributes="Bold"
+            TextColor="White"
+            HorizontalOptions="Center" />
+
+        <!-- Input Field for New Questions -->
+        <HorizontalStackLayout>
+            <Entry 
+                x:Name="NewQuestionEntry"
+                Placeholder="Typ hier een nieuwe vraag..."
+                TextColor="Black"
+                BackgroundColor="White"
+                HorizontalOptions="FillAndExpand" />
+            <Button 
+                Text="Toevoegen"
+                Clicked="AddQuestionButtonClicked"
+                BackgroundColor="#48FDF8"
+                TextColor="Black" />
+        </HorizontalStackLayout>
+
+        <!-- List of Questions -->
+        <CollectionView 
+            x:Name="QuestionsList"
+            ItemsSource="{Binding Questions}"
+            SelectionMode="None"
+            BackgroundColor="White"
+            HeightRequest="400">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <StackLayout Orientation="Horizontal" Padding="10" Spacing="10" BackgroundColor="LightGray">
+                        <!-- Vraag tekst -->
+                        <Label 
+                            Text="{Binding .}" 
+                            FontSize="18"
+                            TextColor="Black"
+                            VerticalOptions="Center"
+                            HorizontalOptions="StartAndExpand" />
+                        <!-- Verwijderknop -->
+                        <Button 
+                            Text="X"
+                            FontSize="18"
+                            TextColor="black"
+                            BackgroundColor="Transparent"
+                            FontAttributes="Bold"
+                            WidthRequest="40"
+                            HeightRequest="40"
+                            VerticalOptions="Center"
+                            HorizontalOptions="End"
+                            CommandParameter="{Binding .}"
+                            Clicked="DeleteQuestionButtonClicked" />
+                    </StackLayout>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+        <!-- Random Question Button -->
+        <Button 
+            Text="Random Vraag"
+            FontSize="20"
+            FontAttributes="Bold"
+            BackgroundColor="#FFD700"
+            TextColor="Black"
+            Clicked="RandomQuestionButtonClicked" />
+
+        <!-- Display Random Question -->
+        <Label 
+            x:Name="RandomQuestionLabel"
+            Text="Druk op de knop voor een willekeurige vraag!"
+            FontSize="18"
+            TextColor="White"
+            HorizontalOptions="Center"
+            VerticalOptions="CenterAndExpand"
+            HorizontalTextAlignment="Center" />
+    </VerticalStackLayout>
+</ContentPage>

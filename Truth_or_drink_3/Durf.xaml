@@ -45,12 +45,15 @@
                 BackgroundColor="#48FDF8"
                 TextColor="Black"
                 Clicked="OnPageTapped" />
-        <Label 
-                Text="Of neem een slok"
-                Margin="0,50,0,0"
-                FontSize="26"
-                FontAttributes="Bold"
+        <Button 
+                Text="Neem een slok" 
+                Margin="0,50,0,0" 
+                FontSize="26" 
+                FontAttributes="Bold" 
                 HorizontalOptions="Center" 
-                TextColor="White" />
+                TextColor="Black" 
+                BackgroundColor="#48FDF8"
+                Clicked="OnDrinkButtonClicked" />       
+
     </VerticalStackLayout>
 </ContentPage>
