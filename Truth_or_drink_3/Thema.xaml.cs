@@ -61,6 +61,15 @@ namespace Truth_or_drink_3
             }
             await Navigation.PushAsync(new Custom(_databaseService, _players));
         }
+        private async void FotoKnopClicked(object sender, EventArgs e)
+        {
+            if (_players.Count == 0)
+            {
+                await DisplayAlert("Fout", "Geen spelers beschikbaar.", "OK");
+                return;
+            }
+            await Navigation.PushAsync(new Foto(_databaseService, _players));
+        }
 
         private async void WouldYouRatherKnopClicked(object sender, EventArgs e)
         {

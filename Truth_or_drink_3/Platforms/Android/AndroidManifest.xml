@@ -3,4 +3,10 @@
 	<application android:allowBackup="true" android:supportsRtl="true" android:label="Truth or Drink" android:icon="@mipmap/appicon"></application>
 	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 	<uses-permission android:name="android.permission.INTERNET" />
+	<uses-permission android:name="android.permission.FOREGROUND_SERVICE_CAMERA" />
+	<uses-permission android:name="android.permission.MANAGE_DEVICE_POLICY_CAMERA" />
+	<uses-permission android:name="android.permission.CAMERA" />
+	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+	<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
 </manifest>

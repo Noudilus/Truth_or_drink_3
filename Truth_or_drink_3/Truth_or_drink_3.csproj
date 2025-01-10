@@ -81,6 +81,9 @@
 	  <MauiXaml Update="Durf.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Foto.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Mix.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
