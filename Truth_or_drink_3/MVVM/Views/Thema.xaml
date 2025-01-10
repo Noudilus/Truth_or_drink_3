@@ -79,7 +79,7 @@
             Clicked="WouldYouRatherKnopClicked"
             WidthRequest="200"
             HeightRequest="75"
-            FontSize="20"
+            FontSize="19"
             FontAttributes="Bold"
             TextColor="Black"
             Text="Would You Rather"
