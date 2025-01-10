@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Truth_or_drink_3.Vraag"
+             x:Class="Truth_or_drink_3.Doen"
              BackgroundColor="Black">
 
     <VerticalStackLayout Padding="20" Spacing="20" HorizontalOptions="Center" VerticalOptions="Center">
-
         <Image 
             Source="logo" 
             HorizontalOptions="Center"
@@ -21,8 +20,8 @@
         <Picker x:Name="StarPicker"
                 Title="Moeilijkheidsgraad"
                 SelectedIndexChanged="OnStarPickerChanged"
-                TextColor="Black"
-                BackgroundColor="White">
+                TextColor="White"
+                BackgroundColor="Black">
             <Picker.Items>
                 <x:String>1 Ster</x:String>
                 <x:String>2 Sterren</x:String>

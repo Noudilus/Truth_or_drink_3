@@ -69,33 +69,37 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <MauiXaml Update="Create.xaml">
+	  <MauiXaml Update="MVVM\Views\Create.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Custom.xaml">
+	  <MauiXaml Update="MVVM\Views\Custom.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Doen.xaml">
+	  <MauiXaml Update="MVVM\Views\Doen.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Durf.xaml">
+	  <MauiXaml Update="MVVM\Views\Durf.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Foto.xaml">
+	  <MauiXaml Update="MVVM\Views\Foto.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Mix.xaml">
+	  <MauiXaml Update="MVVM\Views\Mix.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Thema.xaml">
+	  <MauiXaml Update="MVVM\Views\Thema.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Vraag.xaml">
+	  <MauiXaml Update="MVVM\Views\Vraag.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Wouldyourather.xaml">
+	  <MauiXaml Update="MVVM\Views\Wouldyourather.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="MVVM\ViewModels\" />
 	</ItemGroup>
 
 </Project>

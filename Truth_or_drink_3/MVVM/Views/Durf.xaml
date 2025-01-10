@@ -22,7 +22,7 @@
                 Title="Moeilijkheidsgraad"
                 SelectedIndexChanged="OnStarPickerChanged"
                 TextColor="Black"
-                BackgroundColor="White">
+                BackgroundColor="Black">
             <Picker.Items>
                 <x:String>1 Ster</x:String>
                 <x:String>2 Sterren</x:String>

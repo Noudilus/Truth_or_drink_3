@@ -13,7 +13,28 @@ public partial class Foto : ContentPage
         "Maak een foto van het gekste voorwerp in de kamer.",
         "Maak een selfie met een grappig gezicht.",
         "Maak een foto van iets met een schaduw.",
-        "Maak een foto van je favoriete drankje."
+        "Maak een foto van je favoriete drankje.",
+        "Maak een foto van iets wat je hebt gekocht tijdens je laatste vakantie.",
+        "Maak een foto van een object dat je altijd bij je hebt.",
+        "Maak een foto van iets dat je nooit had verwacht te zien.",
+        "Maak een foto van een voorwerp dat begint met de letter 'A'.",
+        "Maak een foto van iets dat je vroeger als kind geweldig vond.",
+        "Maak een foto van iets dat je vandaag hebt geleerd.",
+        "Maak een foto van iets dat je zou meenemen naar een onbewoond eiland.",
+        "Maak een foto van een voorwerp dat je zou gebruiken als je superkracht had.",
+        "Maak een foto van iets dat je je ouders nooit zou durven laten zien.",
+        "Maak een foto van je favoriete boek of film in je kamer.",
+        "Maak een foto van iets dat je zou gebruiken in een kunstwerk.",
+        "Maak een foto van een voorwerp dat je niet zonder kunt functioneren.",
+        "Maak een foto van iets dat je gelukkig maakt.",
+        "Maak een foto van iets wat je altijd hebt willen leren.",
+        "Maak een foto van iets dat je nooit eerder hebt geprobeerd.",
+        "Maak een foto van een object dat je altijd in je tas hebt zitten.",
+        "Maak een foto van iets dat je zou gebruiken voor een sciencefictionfilm.",
+        "Maak een foto van iets dat je verbazingwekkend mooi vindt.",
+        "Maak een foto van iets dat je dacht dat het niet bestond.",
+        "Maak een foto van iets dat je nooit zou kopen, maar het ziet er interessant uit."
+
     };
 
     public Foto(DatabaseService databaseService, List<Player> players)
