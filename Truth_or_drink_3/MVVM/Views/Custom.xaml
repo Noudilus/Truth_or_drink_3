@@ -27,7 +27,7 @@
                 Text="Toevoegen"
                 FontAttributes="Bold"
                 Clicked="AddQuestionButtonClicked"
-                BackgroundColor="#48FDF8"
+                BackgroundColor="#f700ff"
                 Margin="20,0,0,0"
                 TextColor="Black" />
         </HorizontalStackLayout>
@@ -72,7 +72,7 @@
             Text="Random Vraag"
             FontSize="20"
             FontAttributes="Bold"
-            BackgroundColor="#FFD700"
+            BackgroundColor="#f700ff"
             TextColor="Black"
             Clicked="RandomQuestionButtonClicked" />
 

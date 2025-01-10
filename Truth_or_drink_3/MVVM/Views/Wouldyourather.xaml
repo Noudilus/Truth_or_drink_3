@@ -22,7 +22,7 @@
             FontSize="36"
             FontAttributes="Bold"
             HorizontalOptions="Center"
-            TextColor="#48FDF8" />
+            TextColor="#FFD700" />
 
         <!-- Label voor de naam van de speler -->
         <Label
@@ -47,7 +47,7 @@
             Clicked="GetQuestionButtonClicked"
             FontSize="20"
             Margin="0,0,0,0"
-            BackgroundColor="#48FDF8"
+            BackgroundColor="#FFD700"
             TextColor="Black"
             HorizontalOptions="Center" />
 

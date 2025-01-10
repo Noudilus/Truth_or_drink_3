@@ -1,3 +1,4 @@
+using SQLite;
 using Microsoft.Maui.Controls;
 using Microsoft.Maui.Devices.Sensors;
 using System;
@@ -9,15 +10,13 @@ namespace Truth_or_drink_3
 {
     public partial class Mix : ContentPage
     {
-        private readonly DatabaseService _databaseService;
-        private List<Player> _players;
+        private List<Player> _players = new(); // Dynamische spelerslijst
         private int _currentPlayerIndex = 0;
         private readonly Random _random = new();
         private int _selectedStars = 0;
-        private bool _isGyroscopeStill = true;
-        private bool _isGyroscopeRunning = false;
 
-        // Vragen georganiseerd op basis van sterren
+        private readonly DatabaseService _databaseService;
+
         private readonly List<(string Text, int Stars)> _questions = new()
         {
             // 1 ster vragen
@@ -120,83 +119,105 @@ namespace Truth_or_drink_3
             ("[Random speler], vertel een mop, maar doe alsof het een levensles is.", 5),
         };
 
-        // Constructor om DatabaseService en List<Player> te accepteren
         public Mix(DatabaseService databaseService, List<Player> players)
         {
             InitializeComponent();
-            _databaseService = databaseService ?? throw new ArgumentNullException(nameof(databaseService));
-            _players = players ?? new List<Player>(); // Zorg ervoor dat de spelerslijst niet null is
+            _databaseService = databaseService;
+
+            // Initialize the players list properly (empty list if null)
+            _players = players ?? new List<Player>();
+            LoadPlayersFromDatabase();
         }
 
-        // Haal de lijst van spelers op van de database
-        private async Task LoadPlayersAsync()
+        private async void LoadPlayersFromDatabase()
         {
-            _players = await _databaseService.GetPlayersAsync();
-            if (_players.Count == 0)
+            try
             {
-                await DisplayAlert("Fout", "Er zijn geen spelers in de database.", "OK");
+                var players = await _databaseService.GetPlayersAsync();
+                _players.AddRange(players);
+
+                if (_players.Count == 0)
+                {
+                    await DisplayAlert("Waarschuwing", "Er zijn geen spelers beschikbaar. Voeg spelers toe om door te gaan.", "OK");
+                }
+            }
+            catch (Exception ex)
+            {
+                await DisplayAlert("Fout", $"Kon spelers niet laden: {ex.Message}", "OK");
             }
         }
 
-        // Laad de spelers wanneer de pagina wordt geladen
-        protected override async void OnAppearing()
+        private void OnPageTapped(object sender, EventArgs e)
         {
-            base.OnAppearing();
-            await LoadPlayersAsync();
-        }
-
-        // Event handler voor de Picker verandering
-        private void OnStarPickerChanged(object sender, EventArgs e)
-        {
-            var picker = (Picker)sender;
-            var selectedDifficulty = picker.SelectedItem.ToString();
-            // Stel de ster waarde in op basis van de selectie
-            _selectedStars = selectedDifficulty switch
+            if (_selectedStars == 0)
             {
-                "1 Ster" => 1,
-                "2 Sterren" => 2,
-                "3 Sterren" => 3,
-                "4 Sterren" => 4,
-                "5 Sterren" => 5,
-                _ => 1
-            };
-        }
-
-        // Start de ronde
-        private void StartButton_Clicked(object sender, EventArgs e)
-        {
-            if (_players.Count == 0)
-            {
-                DisplayAlert("Fout", "Er zijn geen spelers om een vraag aan te stellen.", "OK");
+                QuestionLabel.Text = "Selecteer eerst een moeilijkheidsgraad!";
                 return;
             }
 
-            _currentPlayerIndex = _random.Next(_players.Count);
-            var currentPlayer = _players[_currentPlayerIndex];
-
-            // Filter vragen op basis van geselecteerde sterren
             var filteredQuestions = _questions.Where(q => q.Stars == _selectedStars).ToList();
+            if (!filteredQuestions.Any())
+            {
+                QuestionLabel.Text = "Geen vragen beschikbaar!";
+                return;
+            }
 
-            // Kies een willekeurige vraag uit de gefilterde lijst
-            var randomQuestion = filteredQuestions[_random.Next(filteredQuestions.Count)];
-            var questionText = randomQuestion.Text.Replace("[Random speler]", currentPlayer.Name);
-
-            // Toon de vraag
-            QuestionLabel.Text = questionText;
+            ShowNextQuestion(filteredQuestions);
         }
 
-        // Event handler voor de knop "Tik hier voor een vraag"
-        private void OnPageTapped(object sender, EventArgs e)
+        private async void OnDrinkButtonClicked(object sender, EventArgs e)
         {
-            // Hier kun je andere logica toevoegen om bijvoorbeeld de vraag te genereren
-            QuestionLabel.Text = "Vraag gegenereerd!";
+            if (_players.Count == 0)
+            {
+                await DisplayAlert("Fout", "Geen spelers beschikbaar.", "OK");
+                return;
+            }
+
+            // Verhoog de teller voor de huidige speler
+            var currentPlayer = _players[_currentPlayerIndex];
+            currentPlayer.DrinkCounter++;
+
+            // Werk de drinkteller bij in de database
+            await _databaseService.UpdatePlayerDrinkCounterAsync(currentPlayer.Id, currentPlayer.DrinkCounter);
+
+            // Controleer of de teller 10 bereikt
+            if (currentPlayer.DrinkCounter >= 10)
+            {
+                currentPlayer.DrinkCounter = 0; // Reset de teller
+                await DisplayAlert("Slok genomen!", $"{currentPlayer.Name}, je hebt genoeg gedronken!", "OK");
+            }
+
+            // Ga naar de volgende vraag
+            if (_selectedStars > 0)
+            {
+                var filteredQuestions = _questions.Where(q => q.Stars == _selectedStars).ToList();
+                if (filteredQuestions.Any())
+                {
+                    ShowNextQuestion(filteredQuestions);
+                }
+            }
         }
 
-        // Event handler voor de knop "Neem een slok"
-        private void OnDrinkButtonClicked(object sender, EventArgs e)
+        private void ShowNextQuestion(List<(string Text, int Stars)> filteredQuestions)
         {
-            // Voeg hier logica toe voor de "Neem een slok"-knop
-            QuestionLabel.Text = "Je hebt een slok genomen!";
+            if (_players.Count == 0)
+            {
+                QuestionLabel.Text = "Er zijn geen spelers!";
+                return;
+            }
+
+            var randomQuestion = filteredQuestions[_random.Next(filteredQuestions.Count)].Text;
+            var currentPlayer = _players[_currentPlayerIndex].Name;
+
+            _currentPlayerIndex = (_currentPlayerIndex + 1) % _players.Count;
+
+            var displayedQuestion = randomQuestion.Replace("[Random speler]", currentPlayer);
+            QuestionLabel.Text = displayedQuestion;
+        }
+
+        private void OnStarPickerChanged(object sender, EventArgs e)
+        {
+            _selectedStars = StarPicker.SelectedIndex + 1;
         }
     }
 }

@@ -68,6 +68,6 @@
             TextColor="Black"
             BackgroundColor="#f700ff"
             WidthRequest="120"
-            Margin="0,-69,150,0"/>
+            Margin="0,-62,150,0"/>
     </StackLayout>
 </ContentPage>
